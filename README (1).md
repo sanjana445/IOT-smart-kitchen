@@ -1,0 +1,4 @@
+# IOT-Smart-Kitchen
+
+The kitchen is one of the important places in a house. The safety factor is the main aspect that must be
+taken into account during the activity in the kitchen. The existence of gas leakage, uncontrolled fire, excessive temperatures & a moist environment must be quickly identified and addressed. Apart from this, it is necessary to monitor & control Kitchen Appliances like lights, fridge, oven, etc. remotely. The main motto of this project is to make a prototype of an IoT Based Smart Kitchen using the Internet of Things. This can be useful to turn on exhaust when gas starts leaking when we are not at home. The system uses multiple sensors, relays & NodeMCU ESP8266 Board. We can monitor all the sensor data on Blynk Applications. We can also send the command from Blynk App to control Kitchen Appliances for applications like pre heating microwave oven.
