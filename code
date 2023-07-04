@@ -1,0 +1,58 @@
+#CODE:
+
+Arduino IoT Cloud Variables description
+The following variables are automatically generated and updated when changes are made to the Thing
+String message;
+int gas_data;
+int pir;
+CloudRelativeHumidity humidity; CloudTemperature temperature;
+#include "thingProperties.h"
+#include "DHT.h"
+#define DHTpin 2 // D4 on the nodemcu ESP8266 #define DHTTYPE DHT11
+DHT dht(DHTpin, DHTTYPE);
+int gas_sensor=A0;
+int pir_sensor=D7:
+void setup() {
+pinMode(D0,OUTPUT);
+// Initialize serial and wait for port to open:
+Serial.begin(9600);
+// This delay gives the chance to wait for a Serial Monitor without blocking if none is found delay(1500);
+pinMode(gas_sensor,INPUT);
+pinMode(pir,INPUT);
+pinMode(BUZZER,OUTPUT);
+pinMode(led,OUTPUT);
+// Defined in thingProperties.h
+initProperties();
+// Connect to Arduino IoT Cloud ArduinoCloud.begin(ArduinoIoTPreferredConnection); setDebugMessageLevel(2); ArduinoCloud.printDebugInfo();
+}
+
+void loop() { ArduinoCloud.update();
+float hm=dht.readHumidity(); Serial.print("Humidity "); Serial.println(hm);
+float temp=dht.readTemperature(); Serial.print("Temperature "); Serial.println(temp); humidity=hm;
+temperature=temp;
+message="Temperature=" + String(temperature)+ "Humidity"+ String(humidity)+ "gas-value="+ String(gas_data); gas_data=analogRead(gas_sensor);
+pir=analogRead(pir_sensor);
+Serial.print("gas_value");
+Serial.println(gas_data);
+}
+void onHumidityChange() { if(humidity>70)
+{ digitalWrite(D0,HIGH);
+} else {
+digitalWrite(D0,LOW); }}
+
+void onGasDataChange() {
+// Add your code here to act upon GasData change
+if(gas_data>100)
+{ digitalWrite(D0,HIGH);
+digitalWrite(BUZZER,HIGH); message="gas detected" + String(gas_data); }
+else
+{ digitalWrite(D0,LOW);
+digitalWrite(BUZZER,LOW);
+message="gas not detected" + String(gas_data); }
+}
+void onPirChange() {
+{
+digitalWrite(pir,HIGH);
+} else {
+digitalWrite(pir,LOW); }
+}
